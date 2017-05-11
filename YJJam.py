@@ -133,7 +133,6 @@ class Jam(object):
         
         # Check if Jam directory exists
         if os.path.exists(JAM_DIRECTORY):
-            print "TRACE[Jam.download]> Jam directory exists at path: " + JAM_DIRECTORY
             jamDirectoryExists = True
         else:
             print "ERROR[Jam.download]> A Jam should not be downloading if the Jam directory does not exists: " + str(self)
@@ -346,7 +345,7 @@ class Jam(object):
                 os.makedirs(os.path.dirname(JAM_DIRECTORY))
             except OSError as exception:
                 if exception.errno != errno.EEXIST:
-                    raise
+                    raise exception
 
     @staticmethod
     def removeJamDirectory():

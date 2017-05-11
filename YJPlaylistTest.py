@@ -3,6 +3,8 @@ import unittest
 
 from YJJam import Jam, JamPlay
 from YJPlaylist import Playlist
+from threading import Thread
+from time import sleep
 
 class PlaylistCreationTests(unittest.TestCase):
     def test_sharedPlaylist(self):
@@ -20,15 +22,22 @@ class PlaylistAddAndRemoveTests(unittest.TestCase):
 
     def test_addJamToPlaylist(self):
         token = "Cb6izAqdTnc"
+        
+        thread = Thread(target=Playlist.sharedPlaylist().add, args=[token])
+        thread.start()
+        
+        thread2 = Thread(target=Playlist.sharedPlaylist().add, args=[token])
+        thread2.start()
+        
         Playlist.sharedPlaylist().add(token)
         
-        self.assertEqual(len(os.listdir(Jam.getJamDirectory())), 1)
-        self.assertTrue(os.path.exists(Jam.getJamDirectory() + token + ".mp4"))
+        thread.join()
+        thread2.join()
+
+#self.assertEqual(len(os.listdir(Jam.getJamDirectory())), 2)
+#       self.assertTrue(os.path.exists(Jam.getJamDirectory() + token + ".mp4"))
         
-        jamPlay = Playlist.sharedPlaylist().jamPlayOrder[0]
-
-        Playlist.sharedPlaylist().remove(jamPlay.UUID)
-
+        sleep(5)
 
 if __name__ == "__main__":
     creationSuite = unittest.TestLoader().loadTestsFromTestCase(PlaylistCreationTests)

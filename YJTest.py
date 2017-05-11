@@ -1,4 +1,6 @@
 from YJExceptions import *
+from threading import Thread
+from time import sleep
 
 class thing(object):
     def __init__(self, val, id):
@@ -17,16 +19,22 @@ class thing(object):
         return "poop"
 
     def foo(self):
-        print "hi " + str(self)
+        sleep(5)
+        print "hi"
 
-t = thing(1, 'a')
-t.foo()
-print "hi " + str(t)
+    def doo(self):
+        t = Thread(target=self.foo)
+        t.start()
+# t.join()
 
+#t = thing(1, 'a')
+#t.doo()
+#print "hi " + str(t)
+#
 try:
-    raise JamDownloadNoDirectoryError
+    raise JamDeleteOnlyReferenceIsPlayingError
 except JamError as e:
-    print "hi" + str(e)
+    print type(e) == JamError
 
 #t1 = thing(1, 'a')
 #t2 = thing(2, 'a')

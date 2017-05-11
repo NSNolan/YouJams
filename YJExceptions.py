@@ -18,7 +18,6 @@ class PlaylistAddFailureError(PlaylistAddError):
 # Playlist Remove Exceptions
 
 class PlaylistRemoveError(PlaylistError):
-    """unused"""
     pass
 
 class PlaylistRemoveNoJamPlayForUUIDError(PlaylistRemoveError):
@@ -30,12 +29,17 @@ class PlaylistRemoveNoJamForTokenError(PlaylistRemoveError):
 class PlaylistRemoveFailureError(PlaylistRemoveError):
     pass
 
+
+class PlaylistLoopJamDoesNotExist(PlaylistError):
+    pass
+
+#class PlaylistLoopNoJam
+
 ##
 # Jam Exceptions
 ##
 
 class JamError(Exception):
-    """unused"""
     pass
 
 class JamUnknownStateError(JamError):
@@ -44,7 +48,6 @@ class JamUnknownStateError(JamError):
 # Jam Download Exceptions
 
 class JamDownloadError(JamError):
-    """unused"""
     pass
 
 class JamDownloadNoJamDirectoryError(JamDownloadError):
@@ -59,7 +62,6 @@ class JamDownloadFailureError(JamDownloadError):
 # Jam Delete Exceptions
 
 class JamDeleteError(JamError):
-    """unused"""
     pass
 
 class JamDeleteNotDownloadedError(JamDeleteError):
@@ -80,7 +82,6 @@ class JamDeleteFailureError(JamDeleteError):
 # Jam Play Exceptions
 
 class JamPlayError(JamError):
-    """unused"""
     pass
 
 class JamPlayNotDownloadedError(JamPlayError):
